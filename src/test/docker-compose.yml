@@ -1,7 +1,9 @@
 services:
-  test-nats:
-    image: nats:latest
-    command: "-js"
+  nats:
+    image: nats:2.10.24
+    command: ["-c", "/etc/nats/nats-server.conf", "-js"]
     ports:
-      - "5222:4222" # NATS client connections
-      - "8223:8222" # Monitoring
+      - "5222:4222"
+      - "18222:8222"
+    volumes:
+      - "./config/nats-server.conf:/etc/nats/nats-server.conf"
